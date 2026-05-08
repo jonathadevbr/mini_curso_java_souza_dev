@@ -34,5 +34,9 @@ public class ProdutoController {
         return produtoService.putProdutos(produtoDto, id);
     }
 
-
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProdutos(@PathVariable Integer id) {
+        produtoService.deleteProdutos(id);
+    }
 }
