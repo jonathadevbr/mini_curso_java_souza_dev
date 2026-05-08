@@ -2,6 +2,7 @@ package br.com.jonatha.spring_boot_essentials.controller;
 
 import br.com.jonatha.spring_boot_essentials.database.entity.ProdutoEntity;
 import br.com.jonatha.spring_boot_essentials.dto.ProdutoDto;
+import br.com.jonatha.spring_boot_essentials.exception.NotFoundException;
 import br.com.jonatha.spring_boot_essentials.service.ProdutoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProdutoEntity putProdutos(@PathVariable Integer id, @RequestBody ProdutoDto produtoDto) {
+    public ProdutoEntity putProdutos(@PathVariable Integer id, @RequestBody ProdutoDto produtoDto) throws NotFoundException {
         return produtoService.putProdutos(produtoDto, id);
     }
 

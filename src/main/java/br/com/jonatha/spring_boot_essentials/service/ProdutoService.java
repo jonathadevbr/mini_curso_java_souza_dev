@@ -2,6 +2,7 @@ package br.com.jonatha.spring_boot_essentials.service;
 
 import br.com.jonatha.spring_boot_essentials.database.entity.ProdutoEntity;
 import br.com.jonatha.spring_boot_essentials.dto.ProdutoDto;
+import br.com.jonatha.spring_boot_essentials.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -59,11 +60,11 @@ public class ProdutoService {
         return novoProduto;
     }
 
-    public ProdutoEntity putProdutos(ProdutoDto produtoDto, Integer id) {
+    public ProdutoEntity putProdutos(ProdutoDto produtoDto, Integer id) throws NotFoundException {
         ProdutoEntity produto = PRODUTOS.stream()
                 .filter(p -> p.getId().equals(id))
                 .findAny()
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado"));
 
         produto.setNome(produtoDto.getNome());
         produto.setPreco(produtoDto.getPreco());
